@@ -1,3 +1,5 @@
 {
-  "item.testmod.cotton": "Cotton boll"
+  "item.testmod.cotton": "Cotton boll",
+  "item.testmod.cotton_block": "Block of Cotton",
+  "block.testmod.cotton_block": "Block of Cotton"
 }

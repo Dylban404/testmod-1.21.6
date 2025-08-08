@@ -10,15 +10,24 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
+import java.util.function.Function;
+
 public class ModItems {
 
-    public static final Item COTTON = registerItem("cotton", new Item(
-            new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(TestMod.MOD_ID,"cotton")))));
+    public static final Item COTTON = registerItem("cotton", Item::new, new Item.Settings());
 
     // Item registering helper method
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(TestMod.MOD_ID, name), item);
+    public static Item registerItem(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
+        // Create the item key.
+        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(TestMod.MOD_ID, name));
+        // Create the item instance.
+        Item item = itemFactory.apply(settings.registryKey(itemKey));
+        // Register the item.
+        Registry.register(Registries.ITEM, itemKey, item);
+
+        return item;
     }
+
 
     public static void registerModItems() {
         TestMod.LOGGER.info("Registering items for " + TestMod.MOD_ID);

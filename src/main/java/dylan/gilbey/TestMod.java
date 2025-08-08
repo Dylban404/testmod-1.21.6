@@ -1,5 +1,6 @@
 package dylan.gilbey;
 
+import dylan.gilbey.block.ModBlocks;
 import dylan.gilbey.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,5 +14,6 @@ public class TestMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
         ModItems.registerModItems();
+        ModBlocks.registerModBlocks();
 	}
 }
